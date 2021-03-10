@@ -19,6 +19,8 @@ const useStyles = makeStyles({
     position: "relative",
     height: "5rem",
     width: "100vw",
+    display: "flex",
+    flexDirection: "row",
   },
   button: {
     background: "#d4aa63",
@@ -29,7 +31,18 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <header className={classes.header}>hello</header>
+      <div className={classes.firstLevelFlexChild}>
+        <header className={classes.header}>
+          <div className={classes.headerItem}>hello</div>
+          <div className={classes.headerItem}>world</div>
+        </header>
+      </div>
+      <div className={classes.firstLevelFlexChild}>
+        <div className={classes.content}>
+          <div className={classes.img}>img</div>
+          <div className={classes.selector}>selector</div>
+        </div>
+      </div>
     </div>
   );
 }
