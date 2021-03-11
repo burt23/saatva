@@ -12,27 +12,26 @@ const useStyles = makeStyles({
     height: "100vh",
     display: "flex",
     flexDirection: "column",
-    overflow: "hidden",
+    // overflow: "auto",
     justifyItems: "center",
     alignItems: "center",
   },
-  firstLevelFlexChild: {
-    // background: "#d4aa63",
-    flex: "0 1 auto",
-    maxWidth: "80vw",
-    minWidth: "80vw",
-    // minHeight: "100%",
-    position: "relative",
+  wrapper: {
+    width: "80vw",
   },
   header: {
     background: "#fff",
+    position: "relative",
+    width: "80vw",
+    height: "5rem",
+  },
+  headerWrapper: {
     position: "relative",
     height: "5rem",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    // padding: "2rem 0 ",
   },
   button: {
     background: "#d4aa63",
@@ -42,18 +41,18 @@ const useStyles = makeStyles({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    minHeight: "70vmin",
+    height: "90vh",
     position: "relative",
   },
   img: {
     flex: "3 1 auto",
-    border: "10px solid gold",
-    minWidth: "500px",
+    minWidth: "375px",
+    position: "relative",
   },
   selector: {
     flex: "2 1 auto",
-    border: "10px solid green",
     minWidth: "300px",
+    justifySelf: "center",
   },
 });
 
@@ -61,14 +60,14 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.firstLevelFlexChild}>
+      <div className={classes.wrapper}>
         <header className={classes.header}>
-          <div className={classes.headerItem}>hello</div>
-          <div className={classes.headerItem} />
-          <div className={classes.headerItem}>world</div>
+          <div className={classes.headerWrapper}>
+            <div className={classes.headerItem}>hello</div>
+            <div className={classes.headerItem} />
+            <div className={classes.headerItem}>world</div>
+          </div>
         </header>
-      </div>
-      <div className={classes.firstLevelFlexChild}>
         <div className={classes.content}>
           <div className={classes.img}>img</div>
           <div className={classes.selector}>selector</div>
