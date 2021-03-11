@@ -1,7 +1,10 @@
-// import logo from "./logo.svg";
+import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-
+import classic from "./images/classic-carousel.jpg";
+import loom from "./images/loom-carousel.jpg";
+import zen from "./images/zen-carousel.jpg";
 import "./App.css";
+
 const useStyles = makeStyles({
   root: {
     background: "#f6f5f3",
@@ -40,36 +43,57 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-around",
-    height: "90vh",
+    // justifyContent: "center",
+    // height: "90vh",
     position: "relative",
   },
   img: {
     flex: "3 1 auto",
-    minWidth: "375px",
+    // minWidth: "20rem",
     position: "relative",
   },
   selector: {
     flex: "2 1 auto",
-    minWidth: "300px",
+    // minWidth: "300px",
     justifySelf: "center",
   },
 });
+const photos = [
+  {
+    name: "classic",
+    img: classic,
+  },
+  {
+    name: "loom",
+    img: loom,
+  },
+  {
+    name: "zen",
+    img: zen,
+  },
+];
 
 function App() {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const classes = useStyles();
+  useEffect(() => setSelectedPhoto(photos[0].img), []);
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <header className={classes.header}>
           <div className={classes.headerWrapper}>
+            {/* {photos.map((photo) => (
+              <img src={photo.img} />
+            ))} */}
             <div className={classes.headerItem}>hello</div>
             <div className={classes.headerItem} />
             <div className={classes.headerItem}>world</div>
           </div>
         </header>
         <div className={classes.content}>
-          <div className={classes.img}>img</div>
+          <div className={classes.img}>
+            {selectedPhoto && <img src={selectedPhoto} />}
+          </div>
           <div className={classes.selector}>selector</div>
         </div>
       </div>
