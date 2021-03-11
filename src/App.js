@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles, Typography } from "@material-ui/core";
 import classic from "./images/classic-carousel.jpg";
 import loom from "./images/loom-carousel.jpg";
 import zen from "./images/zen-carousel.jpg";
@@ -36,8 +36,18 @@ const useStyles = makeStyles({
     justifyContent: "space-around",
     alignItems: "center",
   },
-  button: {
+  addToCart: {
     background: "#d4aa63",
+  },
+  button: {
+    background: "#fff",
+    borderRadius: `0 !important`,
+    border: `1px solid #a6a19a`,
+    padding: "0.5rem 2.5rem",
+    textTransform: "none",
+    // "@hover": {
+    //   background: "#a6a19a",
+    // },
   },
   content: {
     display: "flex",
@@ -49,7 +59,7 @@ const useStyles = makeStyles({
   },
   img: {
     flex: "3 1 auto",
-    // minWidth: "20rem",
+    // minWidth: "30rem",
     position: "relative",
   },
   selector: {
@@ -60,23 +70,35 @@ const useStyles = makeStyles({
 });
 const photos = [
   {
-    name: "classic",
+    name: "Saatva Classic",
     img: classic,
+    price: `$1,299`,
+    index: 0,
   },
   {
-    name: "loom",
+    name: "Loom & leaf",
     img: loom,
+    price: `$899`,
+    index: 1,
   },
   {
-    name: "zen",
+    name: "Zenhaven",
     img: zen,
+    price: `$1,499`,
+    index: 2,
   },
 ];
 
+const defaultMatress = () => photos[0];
+
 function App() {
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  // const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [selectedMatress, setSelectedMatress] = useState(null);
   const classes = useStyles();
-  useEffect(() => setSelectedPhoto(photos[0].img), []);
+  useEffect(() => setSelectedMatress(defaultMatress()), []);
+  const handleSelectMatressTypeClick = (index) => {
+    setSelectedMatress(photos[index]);
+  };
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
@@ -92,9 +114,28 @@ function App() {
         </header>
         <div className={classes.content}>
           <div className={classes.img}>
-            {selectedPhoto && <img src={selectedPhoto} />}
+            {selectedMatress && <img src={selectedMatress.img} />}
           </div>
-          <div className={classes.selector}>selector</div>
+          <div className={classes.selector}>
+            <Typography variant="h2" gutterBottom>
+              Choose Your Mattress
+            </Typography>
+            <Typography variant="body1">SELECT MATTRESS TYPE</Typography>
+            <div className={classes.buttonWrapper}>
+              {photos.map((photo) => (
+                <Button
+                  className={classes.button}
+                  onClick={() => handleSelectMatressTypeClick(photo.index)}
+                >
+                  {photo.name}
+                </Button>
+              ))}
+            </div>
+            <Typography variant="body1">
+              {selectedMatress && selectedMatress.name}
+            </Typography>
+            <Button className={classes.addToCart}>Add to Cart</Button>
+          </div>
         </div>
       </div>
     </div>
