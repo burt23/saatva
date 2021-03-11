@@ -4,6 +4,8 @@ import classic from "./images/classic-carousel.jpg";
 import loom from "./images/loom-carousel.jpg";
 import zen from "./images/zen-carousel.jpg";
 import "./App.css";
+import logo from "./images/logo.png";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   wrapper: {
-    width: "80vw",
+    maxWidth: "1200px",
   },
   header: {
     background: "#fff",
@@ -38,34 +40,46 @@ const useStyles = makeStyles({
   },
   addToCart: {
     background: "#d4aa63",
+    borderRadius: "none",
+    textTransform: "none",
   },
   button: {
     background: "#fff",
     borderRadius: `0 !important`,
-    border: `1px solid #a6a19a`,
+    border: `1px solid #bbb`,
     padding: "0.5rem 2.5rem",
     textTransform: "none",
+    width: "33%",
+    color: "#444",
     // "@hover": {
     //   background: "#a6a19a",
     // },
+  },
+  buttonWrapper: {
+    width: "100%",
+    padding: "0.5rem 0 1rem 0",
   },
   content: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    // justifyContent: "center",
+    justifyContent: "center",
     // height: "90vh",
     position: "relative",
   },
-  img: {
+  imgWrapper: {
     flex: "3 1 auto",
-    // minWidth: "30rem",
     position: "relative",
+  },
+  img: {
+    width: "100%",
+    maxWidth: "600px",
   },
   selector: {
     flex: "2 1 auto",
+    padding: "1rem",
     // minWidth: "300px",
-    justifySelf: "center",
+    // justifySelf: "center",
   },
 });
 const photos = [
@@ -107,14 +121,20 @@ function App() {
             {/* {photos.map((photo) => (
               <img src={photo.img} />
             ))} */}
-            <div className={classes.headerItem}>hello</div>
+            <div className={classes.headerItem}>
+              <img src={logo} />
+            </div>
             <div className={classes.headerItem} />
-            <div className={classes.headerItem}>world</div>
+            <div className={classes.headerItem}>
+              <ShoppingCartIcon />
+            </div>
           </div>
         </header>
         <div className={classes.content}>
-          <div className={classes.img}>
-            {selectedMatress && <img src={selectedMatress.img} />}
+          <div className={classes.imgWrapper}>
+            {selectedMatress && (
+              <img src={selectedMatress.img} className={classes.img} />
+            )}
           </div>
           <div className={classes.selector}>
             <Typography variant="h2" gutterBottom>
@@ -134,7 +154,9 @@ function App() {
             <Typography variant="body1">
               {selectedMatress && selectedMatress.name}
             </Typography>
-            <Button className={classes.addToCart}>Add to Cart</Button>
+            <Button className={classes.addToCart} fullWidth>
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>
