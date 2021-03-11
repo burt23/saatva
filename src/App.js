@@ -13,17 +13,47 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
+    justifyItems: "center",
+    alignItems: "center",
+  },
+  firstLevelFlexChild: {
+    // background: "#d4aa63",
+    flex: "0 1 auto",
+    maxWidth: "80vw",
+    minWidth: "80vw",
+    // minHeight: "100%",
+    position: "relative",
   },
   header: {
-    background: "#ffffff",
+    background: "#fff",
     position: "relative",
     height: "5rem",
-    width: "100vw",
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    // padding: "2rem 0 ",
   },
   button: {
     background: "#d4aa63",
+  },
+  content: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    minHeight: "70vmin",
+    position: "relative",
+  },
+  img: {
+    flex: "3 1 auto",
+    border: "10px solid gold",
+    minWidth: "500px",
+  },
+  selector: {
+    flex: "2 1 auto",
+    border: "10px solid green",
+    minWidth: "300px",
   },
 });
 
@@ -34,6 +64,7 @@ function App() {
       <div className={classes.firstLevelFlexChild}>
         <header className={classes.header}>
           <div className={classes.headerItem}>hello</div>
+          <div className={classes.headerItem} />
           <div className={classes.headerItem}>world</div>
         </header>
       </div>
