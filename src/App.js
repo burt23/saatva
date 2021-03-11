@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, makeStyles, Typography } from "@material-ui/core";
+import clsx from "clsx";
 import classic from "./images/classic-carousel.jpg";
 import loom from "./images/loom-carousel.jpg";
 import zen from "./images/zen-carousel.jpg";
@@ -55,6 +56,10 @@ const useStyles = makeStyles({
     // "@hover": {
     //   background: "#a6a19a",
     // },
+  },
+  selected: {
+    background: "#a6a19a",
+    color: "#fff",
   },
   buttonWrapper: {
     width: "100%",
@@ -162,7 +167,11 @@ function App() {
             <div className={classes.buttonWrapper}>
               {photos.map((photo) => (
                 <Button
-                  className={classes.button}
+                  className={
+                    selectedMatress && selectedMatress.name === photo.name
+                      ? clsx([classes.selected, classes.button])
+                      : classes.button
+                  }
                   onClick={() => handleSelectMatressTypeClick(photo.index)}
                 >
                   {photo.name}
