@@ -5,6 +5,7 @@ import loom from "./images/loom-carousel.jpg";
 import zen from "./images/zen-carousel.jpg";
 import "./App.css";
 import logo from "./images/logo.png";
+import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const useStyles = makeStyles({
@@ -81,6 +82,11 @@ const useStyles = makeStyles({
     // minWidth: "300px",
     // justifySelf: "center",
   },
+  flexRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 const photos = [
   {
@@ -108,11 +114,20 @@ const defaultMatress = () => photos[0];
 function App() {
   // const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedMatress, setSelectedMatress] = useState(null);
+  const [cart, setCart] = useState([]);
   const classes = useStyles();
   useEffect(() => setSelectedMatress(defaultMatress()), []);
+
   const handleSelectMatressTypeClick = (index) => {
-    setSelectedMatress(photos[index]);
+    const selectedMatress = photos[index];
+    setSelectedMatress(selectedMatress);
   };
+
+  const handleAddToCart = (index) => {
+    const updatedCart = [...cart, selectedMatress];
+    setCart(updatedCart);
+  };
+  console.log("render cart", cart);
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
@@ -125,8 +140,11 @@ function App() {
               <img src={logo} />
             </div>
             <div className={classes.headerItem} />
+
             <div className={classes.headerItem}>
-              <ShoppingCartIcon />
+              <Badge badgeContent={cart.length}>
+                <ShoppingCartIcon />
+              </Badge>
             </div>
           </div>
         </header>
@@ -151,10 +169,19 @@ function App() {
                 </Button>
               ))}
             </div>
-            <Typography variant="body1">
-              {selectedMatress && selectedMatress.name}
-            </Typography>
-            <Button className={classes.addToCart} fullWidth>
+            <div className={classes.flexRow}>
+              <Typography variant="body1">
+                {selectedMatress && selectedMatress.name}
+              </Typography>
+              <Typography variant="body1">
+                {selectedMatress && selectedMatress.price}
+              </Typography>
+            </div>
+            <Button
+              onClick={handleAddToCart}
+              className={classes.addToCart}
+              fullWidth
+            >
               Add to Cart
             </Button>
           </div>
