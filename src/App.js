@@ -4,7 +4,6 @@ import clsx from "clsx";
 import classic from "./images/classic-carousel.jpg";
 import loom from "./images/loom-carousel.jpg";
 import zen from "./images/zen-carousel.jpg";
-import "./App.css";
 import logo from "./images/logo.png";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -19,18 +18,20 @@ const useStyles = makeStyles({
     height: "100vh",
     display: "flex",
     flexDirection: "column",
-    // overflow: "auto",
     justifyItems: "center",
     alignItems: "center",
-  },
-  wrapper: {
-    maxWidth: "1200px",
   },
   header: {
     background: "#fff",
     position: "relative",
-    width: "80vw",
+    width: "100vw",
     height: "5rem",
+  },
+  title: {
+    fontFamily: `'Source Serif Pro', serif`,
+  },
+  body: {
+    fontFamily: `'Questrial', sans-serif`,
   },
   headerWrapper: {
     position: "relative",
@@ -42,19 +43,20 @@ const useStyles = makeStyles({
   },
   addToCart: {
     background: "#d4aa63",
-    borderRadius: "none",
+    borderRadius: 0,
+    fontFamily: `'Questrial', sans-serif`,
     textTransform: "none",
   },
   button: {
     background: "#fff",
     borderRadius: `0 !important`,
     border: `1px solid #bbb`,
-    padding: "0.5rem 2.5rem",
+    padding: "1rem 2rem",
     textTransform: "none",
     width: "33%",
     color: "#444",
     // "@hover": {
-    //   background: "#a6a19a",
+    //   background: "#a6a19a", TODO
     // },
   },
   selected: {
@@ -63,6 +65,9 @@ const useStyles = makeStyles({
   },
   buttonWrapper: {
     width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    wordWrap: "wrap",
     padding: "0.5rem 0 1rem 0",
   },
   content: {
@@ -70,11 +75,9 @@ const useStyles = makeStyles({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    // height: "90vh",
     position: "relative",
   },
   imgWrapper: {
-    flex: "3 1 auto",
     position: "relative",
   },
   img: {
@@ -82,10 +85,7 @@ const useStyles = makeStyles({
     maxWidth: "600px",
   },
   selector: {
-    flex: "2 1 auto",
     padding: "1rem",
-    // minWidth: "300px",
-    // justifySelf: "center",
   },
   flexRow: {
     display: "flex",
@@ -117,7 +117,6 @@ const photos = [
 const defaultMatress = () => photos[0];
 
 function App() {
-  // const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedMatress, setSelectedMatress] = useState(null);
   const [cart, setCart] = useState([]);
   const classes = useStyles();
@@ -132,68 +131,63 @@ function App() {
     const updatedCart = [...cart, selectedMatress];
     setCart(updatedCart);
   };
-  console.log("render cart", cart);
   return (
     <div className={classes.root}>
-      <div className={classes.wrapper}>
-        <header className={classes.header}>
-          <div className={classes.headerWrapper}>
-            {/* {photos.map((photo) => (
-              <img src={photo.img} />
-            ))} */}
-            <div className={classes.headerItem}>
-              <img src={logo} />
-            </div>
-            <div className={classes.headerItem} />
-
-            <div className={classes.headerItem}>
-              <Badge badgeContent={cart.length}>
-                <ShoppingCartIcon />
-              </Badge>
-            </div>
+      <header className={classes.header}>
+        <div className={classes.headerWrapper}>
+          <div className={classes.headerItem}>
+            <img alt="saatvaLogo" src={logo} />
           </div>
-        </header>
-        <div className={classes.content}>
-          <div className={classes.imgWrapper}>
-            {selectedMatress && (
-              <img src={selectedMatress.img} className={classes.img} />
-            )}
+          <div className={classes.headerItem} />
+          <div className={classes.headerItem}>
+            <Badge badgeContent={cart.length} className={classes.badge}>
+              <ShoppingCartIcon />
+            </Badge>
           </div>
-          <div className={classes.selector}>
-            <Typography variant="h2" gutterBottom>
-              Choose Your Mattress
+        </div>
+      </header>
+      <div className={classes.content}>
+        <div className={classes.imgWrapper}>
+          {selectedMatress && (
+            <img src={selectedMatress.img} className={classes.img} />
+          )}
+        </div>
+        <div className={classes.selector}>
+          <Typography variant="h2" gutterBottom className={classes.title}>
+            Choose Your Mattress
+          </Typography>
+          <Typography variant="body1" className={classes.body}>
+            SELECT MATTRESS TYPE
+          </Typography>
+          <div className={classes.buttonWrapper}>
+            {photos.map((photo) => (
+              <Button
+                className={
+                  selectedMatress && selectedMatress.name === photo.name
+                    ? clsx([classes.selected, classes.button])
+                    : classes.button
+                }
+                onClick={() => handleSelectMatressTypeClick(photo.index)}
+              >
+                {photo.name}
+              </Button>
+            ))}
+          </div>
+          <div className={classes.flexRow}>
+            <Typography variant="body1" className={classes.body}>
+              {selectedMatress && selectedMatress.name}
             </Typography>
-            <Typography variant="body1">SELECT MATTRESS TYPE</Typography>
-            <div className={classes.buttonWrapper}>
-              {photos.map((photo) => (
-                <Button
-                  className={
-                    selectedMatress && selectedMatress.name === photo.name
-                      ? clsx([classes.selected, classes.button])
-                      : classes.button
-                  }
-                  onClick={() => handleSelectMatressTypeClick(photo.index)}
-                >
-                  {photo.name}
-                </Button>
-              ))}
-            </div>
-            <div className={classes.flexRow}>
-              <Typography variant="body1">
-                {selectedMatress && selectedMatress.name}
-              </Typography>
-              <Typography variant="body1">
-                {selectedMatress && selectedMatress.price}
-              </Typography>
-            </div>
-            <Button
-              onClick={handleAddToCart}
-              className={classes.addToCart}
-              fullWidth
-            >
-              Add to Cart
-            </Button>
+            <Typography variant="body1" className={classes.body}>
+              {selectedMatress && selectedMatress.price}
+            </Typography>
           </div>
+          <Button
+            onClick={handleAddToCart}
+            className={classes.addToCart}
+            fullWidth
+          >
+            Add to Cart
+          </Button>
         </div>
       </div>
     </div>
