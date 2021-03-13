@@ -29,9 +29,6 @@ const useStyles = makeStyles({
     width: "33%",
     fontFamily: `'Questrial', sans-serif`,
     color: "#444",
-    // "@hover": {
-    //   background: "#a6a19a", TODO
-    // },
   },
   selected: {
     background: "#a6a19a",
