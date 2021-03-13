@@ -68,6 +68,7 @@ const Selector = ({
       <div className={classes.buttonWrapper}>
         {photos.map((photo) => (
           <Button
+            key={photo.name}
             className={
               selectedMatress && selectedMatress.name === photo.name
                 ? clsx([classes.selected, classes.button])

@@ -27,11 +27,14 @@ const Header = ({ cart = [] }) => {
     <header className={classes.header}>
       <div className={classes.headerWrapper}>
         <div>
-          <img alt="saatvaLogo" src={logo} />
+          <img alt="saatvaLogo" data-testId="mattressLogo" src={logo} />
         </div>
         <div />
         <div>
-          <Badge badgeContent={cart.length}>
+          <Badge
+            badgeContent={cart.length}
+            data-testId="headerShoppingCartIcon"
+          >
             <ShoppingCartIcon />
           </Badge>
         </div>
