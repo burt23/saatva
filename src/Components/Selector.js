@@ -88,7 +88,12 @@ const Selector = ({
           {selectedMatress && selectedMatress.price}
         </Typography>
       </div>
-      <Button onClick={handleAddToCart} className={classes.addToCart} fullWidth>
+      <Button
+        data-testId="addToCartButton"
+        onClick={handleAddToCart}
+        className={classes.addToCart}
+        fullWidth
+      >
         Add to Cart
       </Button>
     </div>
