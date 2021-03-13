@@ -21,7 +21,7 @@ function App() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-testId="appWrapper">
       <Header cart={cart} />
       <div className={classes.content}>
         <div className={classes.imgWrapper}>

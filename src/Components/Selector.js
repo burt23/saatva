@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     padding: "1rem 2rem",
     textTransform: "none",
     width: "33%",
+    fontFamily: `'Questrial', sans-serif`,
     color: "#444",
     // "@hover": {
     //   background: "#a6a19a", TODO
@@ -46,6 +47,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingBottom: "3rem",
   },
 });
 
