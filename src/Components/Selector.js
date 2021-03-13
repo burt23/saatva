@@ -89,7 +89,7 @@ const Selector = ({
         </Typography>
       </div>
       <Button
-        data-testId="addToCartButton"
+        data-testid="addToCartButton"
         onClick={handleAddToCart}
         className={classes.addToCart}
         fullWidth
