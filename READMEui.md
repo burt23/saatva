@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) for the Saatva hiring test. After cloning down the repo, running npm/yarn install, and cd'ing into the project directory you can run the commands below.
 
 ## Available Scripts
 
